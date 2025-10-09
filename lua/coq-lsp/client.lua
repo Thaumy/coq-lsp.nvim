@@ -1,5 +1,5 @@
-local util = require('coq-lsp.util')
-local render = require('coq-lsp.render')
+local util = require 'coq-lsp.util'
+local render = require 'coq-lsp.render'
 
 ---@class CoqLSPNvim
 ---@field lc lsp.Client
@@ -210,6 +210,7 @@ function CoqLSPNvim:saveVo(bufnr)
   end
   vim.notify(('saved %s'):format(params.textDocument.uri .. 'o'))
 end
+
 commands[#commands + 1] = 'saveVo'
 
 ---@param bufnr buffer
@@ -266,7 +267,7 @@ end
 
 ---@param args string
 function CoqLSPNvim:command(args)
-  local _, to, subcommand = args:find('([%w_]+)%s*')
+  local _, to, subcommand = args:find '([%w_]+)%s*'
   if not vim.tbl_contains(commands, subcommand) then
     error(('"%s" is not a valid CoqLsp command'):format(subcommand))
   end

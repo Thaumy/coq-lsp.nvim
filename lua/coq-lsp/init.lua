@@ -74,19 +74,19 @@ function M.setup(opts)
   local user_on_exit = opts.lsp.on_exit
   opts.lsp.on_exit = make_on_exit(user_on_exit)
 
-  if vim.fn.has('nvim-0.11') == 1 then
+  if vim.fn.has 'nvim-0.11' == 1 then
     -- Use native LSP setup for Neovim 0.11+
     local config = {
-        cmd = { 'coq-lsp' },
-        filetypes = { 'coq' },
-        root_markers = { '_CoqProject', '.git' },
+      cmd = { 'coq-lsp' },
+      filetypes = { 'coq' },
+      root_markers = { '_CoqProject', '.git' },
     }
 
     vim.lsp.config('coq_lsp', vim.tbl_deep_extend('force', config, opts.lsp))
-    vim.lsp.enable('coq_lsp')
+    vim.lsp.enable 'coq_lsp'
   else
     -- Fallback to lspconfig for older versions
-    require('lspconfig').coq_lsp.setup(opts.lsp)
+    require 'lspconfig'.coq_lsp.setup(opts.lsp)
   end
 end
 

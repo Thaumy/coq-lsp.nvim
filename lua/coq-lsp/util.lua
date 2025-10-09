@@ -14,7 +14,7 @@ function M.position_lsp_to_api(bufnr, position, offset_encoding)
   return { position.line, idx }
 end
 
-local str_utfindex = vim.fn.has('nvim-0.11') == 1 and function(s, encoding, index)
+local str_utfindex = vim.fn.has 'nvim-0.11' == 1 and function(s, encoding, index)
   return vim.str_utfindex(s, encoding, index, false)
 end or function(s, encoding, index)
   return vim.lsp.util._str_utfindex_enc(s, index, encoding)
@@ -42,7 +42,7 @@ end
 function M.guess_position(bufnr)
   local win = vim.api.nvim_get_current_win()
   if vim.api.nvim_win_get_buf(win) ~= bufnr then
-    error("can't guess position")
+    error "can't guess position"
   end
   return vim.api.nvim_win_get_cursor(win)
 end

@@ -35,7 +35,7 @@ function M.Goals(goals)
       lines[#lines + 1] = ''
       lines[#lines + 1] = ''
       lines[#lines + 1] =
-        '────────────────────────────────────────────────────────────'
+      '────────────────────────────────────────────────────────────'
       lines[#lines + 1] = ''
     end
     vim.list_extend(lines, M.Goal(i, #goals, goal))
@@ -84,7 +84,7 @@ function M.GoalAnswer(answer, position)
     lines[#lines + 1] = ''
     lines[#lines + 1] = ''
     lines[#lines + 1] =
-      'Messages ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    'Messages ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
     lines[#lines + 1] = ''
     vim.list_extend(lines, M.Messages(answer.messages))
   end
@@ -94,7 +94,7 @@ function M.GoalAnswer(answer, position)
       lines[#lines + 1] = ''
       lines[#lines + 1] = ''
       lines[#lines + 1] =
-        'Shelved ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      'Shelved ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
       lines[#lines + 1] = ''
       vim.list_extend(lines, M.Goals(answer.goals.shelf))
     end
@@ -102,7 +102,7 @@ function M.GoalAnswer(answer, position)
       lines[#lines + 1] = ''
       lines[#lines + 1] = ''
       lines[#lines + 1] =
-        'Given Up ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      'Given Up ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
       lines[#lines + 1] = ''
       vim.list_extend(lines, M.Goals(answer.goals.given_up))
     end
@@ -112,7 +112,7 @@ function M.GoalAnswer(answer, position)
     lines[#lines + 1] = ''
     lines[#lines + 1] = ''
     lines[#lines + 1] =
-      'Error ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    'Error ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
     lines[#lines + 1] = ''
     vim.list_extend(lines, vim.split(answer.error, '\n'))
   end
