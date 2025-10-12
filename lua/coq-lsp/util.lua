@@ -1,7 +1,7 @@
 local M = {}
 
 -- TODO: The position sent by the server may be no longer valid in the current buffer text
----@param bufnr buffer
+---@param bufnr integer
 ---@param position lsp.Position
 ---@param offset_encoding lsp.PositionEncodingKind
 ---@return APIPosition
@@ -20,7 +20,7 @@ end or function(s, encoding, index)
   return vim.lsp.util._str_utfindex_enc(s, index, encoding)
 end
 
----@param bufnr buffer
+---@param bufnr integer
 ---@param position MarkPosition
 ---@param offset_encoding lsp.PositionEncodingKind
 ---@return lsp.Position
@@ -37,7 +37,7 @@ function M.make_position_params(bufnr, position, offset_encoding)
   return { line = row, character = col }
 end
 
----@param bufnr buffer
+---@param bufnr integer
 ---@return MarkPosition | nil
 function M.guess_position(bufnr)
   local win = vim.api.nvim_get_current_win()

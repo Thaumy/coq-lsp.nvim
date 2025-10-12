@@ -29,8 +29,8 @@ local function make_on_init(user_on_init)
   end
 end
 
----@param user_on_attach? fun(client: lsp.Client, bufnr: buffer)
----@return fun(client: lsp.Client, bufnr: buffer)
+---@param user_on_attach? fun(client: lsp.Client, bufnr: integer)
+---@return fun(client: lsp.Client, bufnr: integer)
 local function make_on_attach(user_on_attach)
   return function(client, bufnr)
     if not M.clients[client.id].buffers[bufnr] then

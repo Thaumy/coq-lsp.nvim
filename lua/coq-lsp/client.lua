@@ -3,7 +3,7 @@ local render = require 'coq-lsp.render'
 
 ---@class CoqLSPNvim
 ---@field lc lsp.Client
----@field buffers table<buffer, { info_bufnr: buffer, cancel_goals?: fun() }>
+---@field buffers table<buffer, { info_bufnr: integer, cancel_goals?: fun() }>
 ---@field debounce_timer uv_timer_t
 ---@field config coqlsp.config
 ---@field progress_ns integer
@@ -55,14 +55,14 @@ function CoqLSPNvim:fileProgress(result)
   end
 end
 
----@param bufnr buffer
+---@param bufnr integer
 function CoqLSPNvim:create_info_panel(bufnr)
   local info_bufnr = vim.api.nvim_create_buf(false, true)
   vim.bo[info_bufnr].filetype = 'coq-goals'
   self.buffers[bufnr].info_bufnr = info_bufnr
 end
 
----@param bufnr buffer
+---@param bufnr integer
 function CoqLSPNvim:get_info_bufnr(bufnr)
   local info_bufnr = self.buffers[bufnr].info_bufnr
   if info_bufnr and vim.api.nvim_buf_is_valid(info_bufnr) then
@@ -72,7 +72,7 @@ function CoqLSPNvim:get_info_bufnr(bufnr)
   return self.buffers[bufnr].info_bufnr
 end
 
----@param bufnr? buffer
+---@param bufnr? integer
 function CoqLSPNvim:open_info_panel(bufnr)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
   local win = vim.api.nvim_get_current_win()
@@ -111,7 +111,7 @@ function CoqLSPNvim:show_goals(answer, position)
   end
 end
 
----@param bufnr? buffer registered buffer
+---@param bufnr? integer registered buffer
 ---@param position? MarkPosition
 function CoqLSPNvim:goals_async(bufnr, position)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
@@ -153,7 +153,7 @@ function CoqLSPNvim:goals_async_debounced()
   )
 end
 
----@param bufnr? buffer registered buffer
+---@param bufnr? integer registered buffer
 ---@param position? MarkPosition
 function CoqLSPNvim:goals_sync(bufnr, position)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
@@ -177,7 +177,7 @@ function CoqLSPNvim:goals_sync(bufnr, position)
   self:show_goals(request_result.result, position)
 end
 
----@param bufnr? buffer
+---@param bufnr? integer
 function CoqLSPNvim:get_document(bufnr)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
   local params = {
@@ -195,7 +195,7 @@ function CoqLSPNvim:get_document(bufnr)
   return request_result.result
 end
 
----@param bufnr? buffer
+---@param bufnr? integer
 function CoqLSPNvim:saveVo(bufnr)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
   local params = {
@@ -219,7 +219,7 @@ end
 
 commands[#commands + 1] = 'saveVo'
 
----@param bufnr buffer
+---@param bufnr integer
 function CoqLSPNvim:unregister(bufnr)
   assert(self.buffers[bufnr])
   vim.api.nvim_buf_clear_namespace(bufnr, self.progress_ns, 0, -1)
@@ -230,7 +230,7 @@ function CoqLSPNvim:unregister(bufnr)
   self.buffers[bufnr] = nil
 end
 
----@param bufnr buffer
+---@param bufnr integer
 function CoqLSPNvim:register(bufnr)
   assert(self.buffers[bufnr] == nil)
   self.buffers[bufnr] = {}
