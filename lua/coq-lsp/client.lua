@@ -116,6 +116,9 @@ end
 function CoqLSPNvim:goals_async(bufnr, position)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
   position = position or util.guess_position(bufnr)
+  if position == nil then
+    return
+  end
   local cancel_old = self.buffers[bufnr].cancel_goals
   if cancel_old then
     self.buffers[bufnr].cancel_goals = nil
@@ -155,6 +158,9 @@ end
 function CoqLSPNvim:goals_sync(bufnr, position)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
   position = position or util.guess_position(bufnr)
+  if position == nil then
+    return
+  end
   local params = {
     textDocument = vim.lsp.util.make_text_document_params(bufnr),
     position = util.make_position_params(bufnr, position, self.lc.offset_encoding),
